@@ -44,8 +44,8 @@ public partial class Henry : Node3D
         if(totalRotate > -0.7f){
             rotate = -0.05f;
             totalRotate += rotate;
-             GD.Print("right");
-             GD.Print(totalRotate);
+             //GD.Print("right");
+             //GD.Print(totalRotate);
            
         }
         

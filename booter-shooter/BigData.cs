@@ -12,10 +12,11 @@ public partial class BigData : Node
     Node3D instancedGameScene; 
     Node2D instancedMenuScene; 
 
+   
     public Node CurrentScene { get; set; }
 
 
-
+    float toX = 0;
     int runs = 0;
     int highScore = 0;
 
