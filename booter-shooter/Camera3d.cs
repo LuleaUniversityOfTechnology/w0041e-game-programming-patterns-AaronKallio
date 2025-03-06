@@ -15,19 +15,24 @@ public partial class Camera3d : Camera3D
     public static float clickX = 0;
     public static float clickY = 0;
     public static float clickZ = 0;
+    public static float timer = 0;
+
 
     public static Vector3 clickTo;
     public static Vector3 clickFrom;
 
 
-
+    
     private const float RayLength = 500.0f;
 
 public override void _Input(InputEvent @event)
 {
+    
     clickTo = new Vector3(0,0,0);
     clickFrom = new Vector3(0,0,0);
-    if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed && eventMouseButton.ButtonIndex == MouseButton.Left)
+    timer+=0.1f;
+    if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed && eventMouseButton.ButtonIndex == MouseButton.Left)//&&timer>1)
+    //if (@event is InputEventMouseButton eventMouseButton && eventMouseButton.Pressed &&timer>1)
     {
         //var camera3D = GetNode<Camera3D>("Camera3D");
         var from = camera3D.ProjectRayOrigin(eventMouseButton.Position);
@@ -39,10 +44,13 @@ public override void _Input(InputEvent @event)
         clickZ = to.Z;
         clickTo = to;
         clickFrom = from;
+        timer = 0;
+        GD.Print("nssss");
 
        
         }
-    }
-    
 
+
+
+}
 }

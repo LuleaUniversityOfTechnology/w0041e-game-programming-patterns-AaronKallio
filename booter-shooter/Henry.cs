@@ -8,6 +8,8 @@ public partial class Henry : Node3D
     float gumgum = 0;
     float rotate = 0;
     float totalRotate = 0.001f;
+    
+   
 
     [Export]
     Node3D henry;
@@ -37,6 +39,7 @@ public partial class Henry : Node3D
 
 
        //GD.Print("Viewport Resolution is: ", GetViewport().GetVisibleRect().Size);
+       
        Vector2 ViewportSize =  GetViewport().GetVisibleRect().Size;
        float halfScreenX = ViewportSize.X/2;
        rotate = 0;
