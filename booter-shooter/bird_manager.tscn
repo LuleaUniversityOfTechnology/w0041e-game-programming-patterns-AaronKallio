@@ -50,10 +50,9 @@ material = SubResource("StandardMaterial3D_rvswv")
 radius = 0.2
 height = 0.4
 
-[node name="fairyNode" type="Node3D" node_paths=PackedStringArray("fairy", "rayCast", "body", "blood", "collision")]
+[node name="bird_manager" type="Node3D" node_paths=PackedStringArray("fairy", "body", "blood", "collision")]
 script = ExtResource("1_51d24")
 fairy = NodePath(".")
-rayCast = NodePath("")
 body = NodePath("fairy/RigidBody3D")
 fairyCurve1 = SubResource("Curve_51d24")
 fairyCurve2 = SubResource("Curve_lh1aa")
