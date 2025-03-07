@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cdsb0iaga1nrx"]
+[gd_scene load_steps=46 format=3 uid="uid://cdsb0iaga1nrx"]
 
 [ext_resource type="Script" uid="uid://ceg4kuj7qsdx0" path="res://Camera3d.cs" id="1_80cx4"]
 [ext_resource type="ArrayMesh" uid="uid://drobjgahakiss" path="res://assets/building-castle.obj" id="1_80nbo"]
@@ -17,6 +17,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c68i5eyp17w2y" path="res://assets/character-female-b.obj" id="13_lc2xo"]
 [ext_resource type="Script" uid="uid://bcte6fvy2u6j3" path="res://fairyNode.cs" id="14_215e1"]
 [ext_resource type="Script" uid="uid://c3mdj2xg55b2g" path="res://Henry.cs" id="15_7sc4i"]
+[ext_resource type="PackedScene" uid="uid://ch1l3f1cimht6" path="res://bird_manager.tscn" id="19_boyg6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mwb40"]
 
@@ -163,8 +164,10 @@ material = SubResource("StandardMaterial3D_rvswv")
 radius = 0.2
 height = 0.4
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" node_paths=PackedStringArray("raycast")]
 script = ExtResource("1_e8heu")
+bird_manager = ExtResource("19_boyg6")
+raycast = NodePath("Camera3D/RayCast3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
@@ -186,7 +189,7 @@ mesh = SubResource("CapsuleMesh_mwb40")
 surface_material_override/0 = SubResource("StandardMaterial3D_80nbo")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 0.5, 0, 0.0904589, -100.168)
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 0.5, 0.0351067, -1.10604, -99.7971)
 mesh = SubResource("BoxMesh_80nbo")
 surface_material_override/0 = SubResource("StandardMaterial3D_e2o6t")
 
@@ -374,94 +377,6 @@ mesh = ExtResource("11_lc2xo")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_80cx4")
 
-[node name="fairyNode2" type="Node3D" parent="." node_paths=PackedStringArray("fairy", "rayCast", "body", "blood", "collision")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.1858, 8.58088, 0.207099)
-script = ExtResource("14_215e1")
-fairy = NodePath(".")
+[node name="bird_manager" parent="." node_paths=PackedStringArray("rayCast") instance=ExtResource("19_boyg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.4556)
 rayCast = NodePath("../Camera3D/RayCast3D")
-body = NodePath("fairy/RigidBody3D")
-fairyCurve1 = SubResource("Curve_80cx4")
-fairyCurve2 = SubResource("Curve_e8heu")
-blood = NodePath("blood")
-collision = NodePath("fairy/RigidBody3D")
-
-[node name="fairy" type="MeshInstance3D" parent="fairyNode2"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_e8heu")
-mesh = ExtResource("13_lc2xo")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="fairyNode2/fairy"]
-light_color = Color(0, 0.654902, 1, 1)
-light_energy = 16.0
-light_indirect_energy = 7.674
-light_volumetric_fog_energy = 16.0
-light_size = 0.137
-light_specular = 3.7
-omni_range = 9.791
-omni_attenuation = 3.13
-
-[node name="RigidBody3D" type="RigidBody3D" parent="fairyNode2/fairy"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="fairyNode2/fairy/RigidBody3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_80cx4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="fairyNode2/fairy/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39854, 0)
-mesh = SubResource("SphereMesh_80cx4")
-
-[node name="blood" type="GPUParticles3D" parent="fairyNode2"]
-emitting = false
-amount = 100
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 15
-process_material = SubResource("ParticleProcessMaterial_80cx4")
-draw_pass_1 = SubResource("CapsuleMesh_boyg6")
-
-[node name="fairyNode3" type="Node3D" parent="." node_paths=PackedStringArray("fairy", "rayCast", "body", "blood", "collision")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.1858, 8.58088, 0.207099)
-script = ExtResource("14_215e1")
-fairy = NodePath(".")
-rayCast = NodePath("../Camera3D/RayCast3D")
-body = NodePath("fairy/RigidBody3D")
-fairyCurve1 = SubResource("Curve_80cx4")
-fairyCurve2 = SubResource("Curve_e8heu")
-blood = NodePath("blood")
-collision = NodePath("fairy/RigidBody3D")
-
-[node name="fairy" type="MeshInstance3D" parent="fairyNode3"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_e8heu")
-mesh = ExtResource("13_lc2xo")
-skeleton = NodePath("../..")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="fairyNode3/fairy"]
-light_color = Color(0, 0.654902, 1, 1)
-light_energy = 16.0
-light_indirect_energy = 7.674
-light_volumetric_fog_energy = 16.0
-light_size = 0.137
-light_specular = 3.7
-omni_range = 9.791
-omni_attenuation = 3.13
-
-[node name="RigidBody3D" type="RigidBody3D" parent="fairyNode3/fairy"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="fairyNode3/fairy/RigidBody3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_80cx4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="fairyNode3/fairy/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.39854, 0)
-mesh = SubResource("SphereMesh_80cx4")
-
-[node name="blood" type="GPUParticles3D" parent="fairyNode3"]
-emitting = false
-amount = 100
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 15
-process_material = SubResource("ParticleProcessMaterial_80cx4")
-draw_pass_1 = SubResource("CapsuleMesh_boyg6")

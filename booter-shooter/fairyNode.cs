@@ -41,10 +41,39 @@ float speedMaker = (float)GD.RandRange(0.5, 3.0);
 int sideSpawn = GD.RandRange(0, 1);
 bool hit = false;
 
+Vector3 clickTo;
+
+private Camera3D _camera;
+
     public override void _Ready()
-    {
+    {   
+        //var emitter = GetNode<Camera3d>("/root/Camera3d");
+        //emitter.Connect("RaycastSignalEventHandler", new Callable(this, nameof(OnMySignalReceived)));
+        //var emitter2 = GetNode<Camera3d>("/root/Camera3d");
+        //emitter2.Connect("numberEventHandler", new Callable(this, nameof(OnMySignalReceived2)));
         rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
         fairyReady();
+        _camera = GetNode<Camera3D>("game/Camera3D");  // Adjust path as needed
+        Camera3d.RaycastHitEvent += OnRaycastHit;
+    }
+
+    /*
+    public void OnMySignalReceived(Vector3 clickTo)
+    {
+        GD.Print(clickTo);
+
+    }
+
+    public float OnMySignalReceived2(float number)
+    {
+        return number;
+    }
+*/
+    private void OnRaycastHit(Vector3 position)
+    {
+        //GD.Print($"Raycast hit at: {position}");
+        clickTo = position;
+
     }
 
      public void fairyXsetter()
@@ -127,10 +156,14 @@ bool hit = false;
         fairy.SetPosition(movement);
         body.SetPosition(movement);
         }
-        rayCast.TargetPosition = Camera3d.clickTo;
+        Camera3d.RaycastHitEvent += OnRaycastHit;
+        rayCast.TargetPosition = clickTo;
+       
          //GD.Print(rayCast.TargetPosition);
         //if(rayCast.IsColliding()){
+
         var collider = rayCast.GetCollider();
+       
         GD.Print("--------");
         GD.Print(collider);
         GD.Print(collision);
@@ -158,8 +191,12 @@ bool hit = false;
     public override void _PhysicsProcess(double delta){
 
         fairyDeath(delta);
+       
+        //GD.Print(OnMySignalReceived);
+        //GD.Print(OnMySignalReceived2);
         
-     
+        GD.Print(clickTo);
+      
     }
 
     }

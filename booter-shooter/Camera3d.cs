@@ -3,10 +3,11 @@ using System;
 
 public partial class Camera3d : Camera3D
 {
+
     [Export]
     Camera3D camera3D;
-
-    
+   
+    public static event Action<Vector3> RaycastHitEvent;
     private int _myVariable = 0;
 
     
@@ -21,10 +22,18 @@ public partial class Camera3d : Camera3D
     public static Vector3 clickTo;
     public static Vector3 clickFrom;
 
+     //[Signal] public delegate void RaycastSignal(Vector3 clickTo);
+    [Signal] 
+    public delegate void RaycastSignalEventHandler(Vector3 clickTo);
 
-    
+    [Signal] 
+    public delegate void numberEventHandler(float number);
     private const float RayLength = 500.0f;
 
+public override void _Ready()
+{
+    
+}
 public override void _Input(InputEvent @event)
 {
     
@@ -45,7 +54,9 @@ public override void _Input(InputEvent @event)
         clickTo = to;
         clickFrom = from;
         timer = 0;
-        GD.Print("nssss");
+        EmitSignal(nameof(RaycastSignalEventHandler), clickTo);
+        EmitSignal(nameof(numberEventHandler), 5);
+        RaycastHitEvent?.Invoke(clickTo);
 
        
         }
