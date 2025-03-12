@@ -80,7 +80,6 @@ omni_attenuation = 3.13
 [node name="RigidBody3D" type="RigidBody3D" parent="fairy"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="fairy/RigidBody3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_o3td4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="fairy/RigidBody3D/CollisionShape3D"]

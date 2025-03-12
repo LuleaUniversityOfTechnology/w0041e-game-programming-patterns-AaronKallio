@@ -2,7 +2,11 @@ using Godot;
 using System;
 
 public partial class StartButton : Button
+
 {
+    public static float fairyCount = 0;
+    [Export]
+    OptionButton fairies;
     // Load the scene that we want to switch to
    // private PackedScene _gameScene = GD.Load<PackedScene>("res://game.tscn");
 //    private PackedScene _menuScene = GD.Load<PackedScene>("res://menu.tscn");
@@ -21,6 +25,8 @@ public partial class StartButton : Button
         // Check if the scene is loaded
         //if (_gameScene != null)
         //{
+        int maxFairies = fairies.GetSelectedId();
+        fairyCount = maxFairies;
         var global = GetNode<BigData>("/root/BigData");
         global.GotoScene("res://game.tscn");
             //BigData.instance.SceneLoad(0);

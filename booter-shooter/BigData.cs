@@ -20,6 +20,7 @@ public partial class BigData : Node
     int runs = 0;
     int highScore = 0;
 
+
     public override void _EnterTree()
     {
         instance = this; 

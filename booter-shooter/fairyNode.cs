@@ -9,8 +9,8 @@ public partial class fairyNode : Node3D
 [Export]
 Node3D fairy;
 
-[Export]
-RayCast3D rayCast;
+//[Export]
+//RayCast3D raycast;
 
 [Export]
 Node3D body;
@@ -44,6 +44,8 @@ bool hit = false;
 Vector3 clickTo;
 
 private Camera3D _camera;
+private RayCast3D rayCast;
+
 
     public override void _Ready()
     {   
@@ -51,6 +53,12 @@ private Camera3D _camera;
         //emitter.Connect("RaycastSignalEventHandler", new Callable(this, nameof(OnMySignalReceived)));
         //var emitter2 = GetNode<Camera3d>("/root/Camera3d");
         //emitter2.Connect("numberEventHandler", new Callable(this, nameof(OnMySignalReceived2)));
+
+
+        //rayCast = GetNode<RayCast3D>("game/Camera3D/RayCast3D");
+        rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
+
+
         rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
         fairyReady();
         _camera = GetNode<Camera3D>("game/Camera3D");  // Adjust path as needed
@@ -117,10 +125,10 @@ private Camera3D _camera;
         }
 
        if (xFlipper == 0){
-            x += 0.06f*speedMaker;
+            x += 0.02f*speedMaker;
         }
         else{
-            x -= 0.06f*speedMaker;
+            x -= 0.02f*speedMaker;
         }
 
     }
@@ -138,7 +146,7 @@ private Camera3D _camera;
          x =  x + (fairyCurve2.Sample((float)timer)/10);
         }
 
-         y += 0.06f;
+         y += 0.02f;
     }
 
     public void fairyDeath(double delta)
@@ -156,18 +164,17 @@ private Camera3D _camera;
         fairy.SetPosition(movement);
         body.SetPosition(movement);
         }
+        //rayCast == GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
         Camera3d.RaycastHitEvent += OnRaycastHit;
         rayCast.TargetPosition = clickTo;
        
          //GD.Print(rayCast.TargetPosition);
         //if(rayCast.IsColliding()){
 
+
         var collider = rayCast.GetCollider();
        
-        GD.Print("--------");
-        GD.Print(collider);
-        GD.Print(collision);
-        GD.Print("--------");
+        
 
         if(collider == collision){
             hit = true;
@@ -195,7 +202,7 @@ private Camera3D _camera;
         //GD.Print(OnMySignalReceived);
         //GD.Print(OnMySignalReceived2);
         
-        GD.Print(clickTo);
+        
       
     }
 
