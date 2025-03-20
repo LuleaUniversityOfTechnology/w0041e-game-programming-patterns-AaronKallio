@@ -10,7 +10,7 @@ public partial class Game : Node
      [Export]
     public RayCast3D raycast;
     
-
+    public static float fairyHitCount = 0;
 
    
     public override void _Ready(){

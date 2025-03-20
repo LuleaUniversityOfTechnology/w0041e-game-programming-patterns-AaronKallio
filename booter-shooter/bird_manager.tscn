@@ -84,6 +84,7 @@ shape = SubResource("CapsuleShape3D_o3td4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="fairy/RigidBody3D/CollisionShape3D"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.397236, 0)
+visible = false
 mesh = SubResource("BoxMesh_51d24")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="fairy/RigidBody3D"]

@@ -32,7 +32,7 @@ float count = 0;
 float y = 3;
 double timer = 0;
 int graphSelector = GD.RandRange(0, 1);
-int z = GD.RandRange(-5, -20);
+float z;
 float x;
 float bloodY; 
 
@@ -46,7 +46,19 @@ Vector3 clickTo;
 private Camera3D _camera;
 private RayCast3D rayCast;
 
+float fairyCountMax = StartButton.fairyCount;
 
+
+
+
+enum State
+{
+    spawn, 
+    move,
+    reset
+}
+
+State currentState;
     public override void _Ready()
     {   
         //var emitter = GetNode<Camera3d>("/root/Camera3d");
@@ -57,10 +69,9 @@ private RayCast3D rayCast;
 
         //rayCast = GetNode<RayCast3D>("game/Camera3D/RayCast3D");
         rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
-
-
         rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
         fairyReady();
+        currentState = State.move;
         _camera = GetNode<Camera3D>("game/Camera3D");  // Adjust path as needed
         Camera3d.RaycastHitEvent += OnRaycastHit;
     }
@@ -95,17 +106,27 @@ private RayCast3D rayCast;
         }
     }
 
+
+
     public void fairyYsetter()
     {
       x = GD.RandRange(-5, 5);
     }
 
     public void fairyReady(){
+        z = GD.RandRange(-5, -20);
         if(sideSpawn== 1){
             fairyXsetter();
         }
         else{
+            y = 0;
             fairyYsetter();
+        }
+         if(Game.fairyHitCount == 0){
+            
+            currentState = State.move;
+            GD.Print("cum in trousers");
+
         }
         
     }
@@ -125,12 +146,21 @@ private RayCast3D rayCast;
         }
 
        if (xFlipper == 0){
-            x += 0.02f*speedMaker;
+            x += 0.04f*speedMaker;
         }
         else{
-            x -= 0.02f*speedMaker;
+            x -= 0.04f*speedMaker;
         }
 
+    }
+
+    public void resetZone(double delta)
+    {
+        //Vector3 movement = new Vector3(1, 5, 1);
+        hit = false;
+        currentState = State.spawn;
+
+        
     }
 
     public void fairyMoverY(double delta)
@@ -146,10 +176,11 @@ private RayCast3D rayCast;
          x =  x + (fairyCurve2.Sample((float)timer)/10);
         }
 
-         y += 0.02f;
+         y += 0.04f;
     }
 
-    public void fairyDeath(double delta)
+/*
+    public void mainFairy(double delta)
     {
        if(hit == false){
 
@@ -191,13 +222,96 @@ private RayCast3D rayCast;
         }
     }
 
+*/
+    public void fairyRaytrace(){
+        Camera3d.RaycastHitEvent += OnRaycastHit;
+        rayCast.TargetPosition = clickTo;
+       
+         //GD.Print(rayCast.TargetPosition);
+        //if(rayCast.IsColliding()){
 
 
+        var collider = rayCast.GetCollider();
+       
+        
+
+        if(collider == collision){
+            hit = true;
+            Game.fairyHitCount++;
+            bloodY = y;
+            GD.Print("e");
+            //GD.Print(bloodY);
+          blood.Position = new Vector3(0, bloodY+3, 0);
+            blood.Emitting = true;
+        }
+        if(hit==true){
+            currentState = State.reset;
+            Vector3 movement = new Vector3(x, -3, z);
+            fairy.SetPosition(movement);
+            body.SetPosition(movement);
+        }
+
+    }
+
+    bool fairyOutOfBounds(){
+        if(y > 20 || x > 30 || x < -30){
+            return true;
+        }
+        return false;
+    }
+
+    void handleFairy(double delta){
+
+
+        switch (currentState){
+        case State.spawn:
+                z = GD.RandRange(-5, -20);
+                fairyReady();
+            break;
+
+        case State.move:
+            if(sideSpawn==1){
+            fairyMoverX(delta);
+        }
+        else{
+            fairyMoverY(delta);
+        }
+        
+       Vector3 movement = new Vector3(x, y, z);
+        fairy.SetPosition(movement);
+        body.SetPosition(movement);
+            break;
+        case State.reset:
+           GD.Print("cunm");
+           resetZone(delta);
+            break;
+    }
+
+
+    }
+
+
+    void fairyReset(){
+        if(fairyOutOfBounds()){
+            Vector3 movement = new Vector3(0, -3, 0);
+            fairy.SetPosition(movement);
+            body.SetPosition(movement);
+            Game.fairyHitCount++;
+        }
+        if(Game.fairyHitCount == fairyCountMax){
+            Game.fairyHitCount = 0;
+            GD.Print("semen");
+            currentState = State.reset;
+
+        }
+    }
 
 
     public override void _PhysicsProcess(double delta){
-
-        fairyDeath(delta);
+        GD.Print(Game.fairyHitCount);
+        fairyRaytrace();
+        handleFairy(delta);
+        fairyReset();
        
         //GD.Print(OnMySignalReceived);
         //GD.Print(OnMySignalReceived2);
