@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cdsb0iaga1nrx"]
+[gd_scene load_steps=37 format=3 uid="uid://cdsb0iaga1nrx"]
 
 [ext_resource type="Script" uid="uid://ceg4kuj7qsdx0" path="res://Camera3d.cs" id="1_80cx4"]
 [ext_resource type="ArrayMesh" uid="uid://drobjgahakiss" path="res://assets/building-castle.obj" id="1_80nbo"]
@@ -15,6 +15,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b3nsvsp42hg0a" path="res://assets/rollingPin.obj" id="11_lc2xo"]
 [ext_resource type="ArrayMesh" uid="uid://bpfvflnheflh4" path="res://assets/cooking-fork.obj" id="12_215e1"]
 [ext_resource type="Script" uid="uid://c3mdj2xg55b2g" path="res://Henry.cs" id="15_7sc4i"]
+[ext_resource type="Script" uid="uid://3hl2f2lnler6" path="res://LabelScript.cs" id="17_e8heu"]
 [ext_resource type="PackedScene" uid="uid://ch1l3f1cimht6" path="res://bird_manager.tscn" id="19_boyg6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mwb40"]
@@ -281,3 +282,8 @@ transform = Transform3D(-4.37114e-08, -0.5, 0, 0.769231, -1.68121e-08, 0, 0, 0, 
 mesh = ExtResource("11_lc2xo")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_80cx4")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 805.0
+offset_bottom = 84.0
+script = ExtResource("17_e8heu")

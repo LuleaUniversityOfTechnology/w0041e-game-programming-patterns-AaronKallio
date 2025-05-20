@@ -34,8 +34,9 @@ double timer = 0;
 int graphSelector = GD.RandRange(0, 1);
 float z;
 float x;
-float bloodY; 
-
+float bloodY;
+    static public int score = 0;
+static public int totalScore = 0;
 int xFlipper;
 float speedMaker = (float)GD.RandRange(0.5, 3.0);
 int sideSpawn = GD.RandRange(0, 1);
@@ -125,7 +126,6 @@ State currentState;
          if(Game.fairyHitCount == 0){
             
             currentState = State.move;
-            GD.Print("cum in trousers");
 
         }
         
@@ -179,50 +179,6 @@ State currentState;
          y += 0.04f;
     }
 
-/*
-    public void mainFairy(double delta)
-    {
-       if(hit == false){
-
-        if(sideSpawn==1){
-            fairyMoverX(delta);
-        }
-        else{
-            fairyMoverY(delta);
-        }
-        
-       Vector3 movement = new Vector3(x, y, z);
-        fairy.SetPosition(movement);
-        body.SetPosition(movement);
-        }
-        //rayCast == GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
-        Camera3d.RaycastHitEvent += OnRaycastHit;
-        rayCast.TargetPosition = clickTo;
-       
-         //GD.Print(rayCast.TargetPosition);
-        //if(rayCast.IsColliding()){
-
-
-        var collider = rayCast.GetCollider();
-       
-        
-
-        if(collider == collision){
-            hit = true;
-            bloodY = y;
-            GD.Print("e");
-            //GD.Print(bloodY);
-          blood.Position = new Vector3(0, bloodY+3, 0);
-            blood.Emitting = true;
-        }
-        if(hit==true){
-            Vector3 movement = new Vector3(x, -3, z);
-            fairy.SetPosition(movement);
-            body.SetPosition(movement);
-        }
-    }
-
-*/
     public void fairyRaytrace(){
         Camera3d.RaycastHitEvent += OnRaycastHit;
         rayCast.TargetPosition = clickTo;
@@ -239,9 +195,10 @@ State currentState;
             hit = true;
             Game.fairyHitCount++;
             bloodY = y;
-            GD.Print("e");
+            score++;
+            totalScore++;
             //GD.Print(bloodY);
-          blood.Position = new Vector3(0, bloodY+3, 0);
+            blood.Position = new Vector3(0, bloodY+3, 0);
             blood.Emitting = true;
         }
         if(hit==true){
@@ -282,7 +239,6 @@ State currentState;
         body.SetPosition(movement);
             break;
         case State.reset:
-           GD.Print("cunm");
            resetZone(delta);
             break;
     }
@@ -300,24 +256,35 @@ State currentState;
         }
         if(Game.fairyHitCount == fairyCountMax){
             Game.fairyHitCount = 0;
-            GD.Print("semen");
+            score = 0;
             currentState = State.reset;
 
         }
     }
+     public void exit()
+    {
+        var file = "res://data.txt";
+        var file1 = FileAccess.Open(file, FileAccess.ModeFlags.ReadWrite);
+        int bigScore = int.Parse(file1.GetAsText());
+        if (bigScore < fairyNode.totalScore)
+        {
+            file1.StoreString(fairyNode.totalScore.ToString());
+        }
+        
+   }
 
-
-    public override void _PhysicsProcess(double delta){
+    public override void _PhysicsProcess(double delta)
+    {
         GD.Print(Game.fairyHitCount);
         fairyRaytrace();
         handleFairy(delta);
         fairyReset();
+        if (Input.IsActionPressed("exit"))
+        {
+            exit();
+            GetTree().Quit();
+    }
        
-        //GD.Print(OnMySignalReceived);
-        //GD.Print(OnMySignalReceived2);
-        
-        
-      
     }
 
     }
