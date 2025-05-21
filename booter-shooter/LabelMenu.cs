@@ -6,18 +6,19 @@ public partial class LabelMenu : Label
     public override void _Ready()
     {
         var file = "res://data.txt";
-        var file1 = FileAccess.Open(file, FileAccess.ModeFlags.ReadWrite);
-        Text = "highscore = " + file1.GetAsText();
-        Text = "highscore = ";
-
-
+        using var file1 = FileAccess.Open(file, FileAccess.ModeFlags.Read);
+        Text = "highscore = " + file1.GetLine();
+        if (file1 == null)
+        {
+            Text = "bruh";
+        }
+        
+        file1.Close();
     }
-     
-     public override void _PhysicsProcess(double delta)
+
+    public override void _PhysicsProcess(double delta)
     {
-       var file = "res://data.txt";
-        var file1 = FileAccess.Open(file, FileAccess.ModeFlags.ReadWrite);
-        Text = "highscore = " + file1.GetAsText();
+      
        
     }
 }

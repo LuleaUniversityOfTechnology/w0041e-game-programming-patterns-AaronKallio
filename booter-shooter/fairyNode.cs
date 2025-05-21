@@ -261,16 +261,21 @@ State currentState;
 
         }
     }
-     public void exit()
+    public void exit()
     {
         var file = "res://data.txt";
-        var file1 = FileAccess.Open(file, FileAccess.ModeFlags.ReadWrite);
-        int bigScore = int.Parse(file1.GetAsText());
-        if (bigScore < fairyNode.totalScore)
+        var file1 = FileAccess.Open(file, FileAccess.ModeFlags.Write);
+        
+        uint b = file1.Get32();
+        //int bigScore = int.Parse(b);
+        GD.Print(b);
+        if (b < fairyNode.totalScore)
         {
             file1.StoreString(fairyNode.totalScore.ToString());
         }
         
+        file1.Close();
+        GetTree().Quit();
    }
 
     public override void _PhysicsProcess(double delta)
@@ -282,7 +287,7 @@ State currentState;
         if (Input.IsActionPressed("exit"))
         {
             exit();
-            GetTree().Quit();
+           
     }
        
     }
