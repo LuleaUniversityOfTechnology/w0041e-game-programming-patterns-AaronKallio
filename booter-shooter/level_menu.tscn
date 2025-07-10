@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://k5a586aobi3i"]
+[gd_scene load_steps=4 format=3 uid="uid://cb38dtmxnwilp"]
 
-[ext_resource type="Script" uid="uid://c6g5fwjy7hnp0" path="res://MaxDucks.cs" id="2_mae5d"]
-[ext_resource type="Script" uid="uid://dnwmfsem151gr" path="res://StartButton.cs" id="2_ouk20"]
-[ext_resource type="Script" uid="uid://b14d1seve00qn" path="res://LabelMenu.cs" id="3_mae5d"]
+[ext_resource type="Script" uid="uid://dnwmfsem151gr" path="res://StartButton.cs" id="1_g3bd0"]
+[ext_resource type="Script" uid="uid://c6g5fwjy7hnp0" path="res://MaxDucks.cs" id="2_krrsl"]
+[ext_resource type="Script" uid="uid://b14d1seve00qn" path="res://LabelMenu.cs" id="3_lnidy"]
 
-[node name="Menu" type="Node"]
+[node name="LevelMenu" type="Node"]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = -1
@@ -21,7 +21,7 @@ alignment = 1
 [node name="startButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "enjoy ;)"
-script = ExtResource("2_ouk20")
+script = ExtResource("1_g3bd0")
 
 [node name="maxDucks" type="OptionButton" parent="VBoxContainer"]
 layout_mode = 2
@@ -37,7 +37,7 @@ popup/item_3/text = "4 Ducks"
 popup/item_3/id = 4
 popup/item_4/text = "5 Ducks"
 popup/item_4/id = 5
-script = ExtResource("2_mae5d")
+script = ExtResource("2_krrsl")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 anchors_preset = -1
@@ -56,4 +56,4 @@ offset_top = 257.0
 offset_right = 665.0
 offset_bottom = 297.0
 text = "test"
-script = ExtResource("3_mae5d")
+script = ExtResource("3_lnidy")

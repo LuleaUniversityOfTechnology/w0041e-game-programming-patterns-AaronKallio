@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch1l3f1cimht6"]
+[gd_scene load_steps=10 format=3 uid="uid://b7plxtuvr5hn7"]
 
-[ext_resource type="Script" uid="uid://bcte6fvy2u6j3" path="res://fairyNode.cs" id="1_51d24"]
-[ext_resource type="ArrayMesh" uid="uid://c68i5eyp17w2y" path="res://assets/character-female-b.obj" id="2_lh1aa"]
+[ext_resource type="Script" uid="uid://bcte6fvy2u6j3" path="res://fairyNode.cs" id="1_3dyfb"]
+[ext_resource type="ArrayMesh" uid="uid://c68i5eyp17w2y" path="res://assets/character-female-b.obj" id="2_6r41l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn7yo"]
 albedo_color = Color(0.0705882, 1, 1, 1)
@@ -42,13 +42,13 @@ material = SubResource("StandardMaterial3D_rvswv")
 radius = 0.2
 height = 0.4
 
-[node name="bird_manager" type="Node3D"]
-script = ExtResource("1_51d24")
+[node name="FairyScene" type="Node3D"]
+script = ExtResource("1_3dyfb")
 
 [node name="fairy" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_dn7yo")
-mesh = ExtResource("2_lh1aa")
+mesh = ExtResource("2_6r41l")
 skeleton = NodePath("../..")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="fairy"]

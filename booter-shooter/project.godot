@@ -17,12 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://GameManager.cs"
-Main="res://main.tscn"
-Menu="res://menu.tscn"
-Game="res://game.tscn"
-BirdManager="res://bird_manager.tscn"
-BigData="res://BigData.cs"
+LevelMain="*res://level_main.tscn"
 
 [dotnet]
 

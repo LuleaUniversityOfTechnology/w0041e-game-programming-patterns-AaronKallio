@@ -4,7 +4,7 @@ using System;
 
 public partial class Henry : Node3D
 {
-/*
+
     float gumgum = 0;
     float rotate = 0;
     float totalRotate = 0.001f;
@@ -49,5 +49,5 @@ public partial class Henry : Node3D
         
 
     }
-    */
+   
 }

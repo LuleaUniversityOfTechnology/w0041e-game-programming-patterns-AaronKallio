@@ -1,20 +1,21 @@
-[gd_scene load_steps=36 format=3 uid="uid://cdsb0iaga1nrx"]
+[gd_scene load_steps=37 format=3 uid="uid://dwliyvacngogi"]
 
-[ext_resource type="Script" uid="uid://ceg4kuj7qsdx0" path="res://Camera3d.cs" id="1_80cx4"]
-[ext_resource type="ArrayMesh" uid="uid://drobjgahakiss" path="res://assets/building-castle.obj" id="1_80nbo"]
-[ext_resource type="Script" uid="uid://vyhegqak2nwy" path="res://Game.cs" id="1_e8heu"]
-[ext_resource type="ArrayMesh" uid="uid://b8xp25ah6u7ml" path="res://assets/grass-forest.obj" id="2_e2o6t"]
-[ext_resource type="ArrayMesh" uid="uid://dt0gu6cdtewdn" path="res://assets/tree_detailed.obj" id="3_feb5d"]
-[ext_resource type="ArrayMesh" uid="uid://ccmjon5qakurf" path="res://assets/tent_detailedOpen.obj" id="4_fc0e3"]
-[ext_resource type="ArrayMesh" uid="uid://b66ie53fafjtc" path="res://assets/tent_smallClosed.obj" id="5_7jktm"]
-[ext_resource type="ArrayMesh" uid="uid://b052tcd7sm6yu" path="res://assets/campfire_stones.obj" id="6_j5wjh"]
-[ext_resource type="ArrayMesh" uid="uid://bl4ssgjguhw3" path="res://assets/rock_tallH.obj" id="7_vef74"]
-[ext_resource type="ArrayMesh" uid="uid://c5s7u8xe2kwgj" path="res://assets/tree_pineRoundD.obj" id="8_hve3p"]
-[ext_resource type="ArrayMesh" uid="uid://ddpkslxxef312" path="res://assets/tree_thin.obj" id="9_vef74"]
-[ext_resource type="ArrayMesh" uid="uid://cm2ltecoenphy" path="res://assets/pepper-mill.obj" id="10_iotsf"]
-[ext_resource type="ArrayMesh" uid="uid://b3nsvsp42hg0a" path="res://assets/rollingPin.obj" id="11_lc2xo"]
-[ext_resource type="ArrayMesh" uid="uid://bpfvflnheflh4" path="res://assets/cooking-fork.obj" id="12_215e1"]
-[ext_resource type="Script" uid="uid://c3mdj2xg55b2g" path="res://Henry.cs" id="15_7sc4i"]
+[ext_resource type="Script" uid="uid://vyhegqak2nwy" path="res://Game.cs" id="1_dy46a"]
+[ext_resource type="Script" uid="uid://ceg4kuj7qsdx0" path="res://Camera3d.cs" id="2_u1o6c"]
+[ext_resource type="ArrayMesh" uid="uid://drobjgahakiss" path="res://assets/building-castle.obj" id="3_y3nsb"]
+[ext_resource type="ArrayMesh" uid="uid://b8xp25ah6u7ml" path="res://assets/grass-forest.obj" id="4_esa35"]
+[ext_resource type="ArrayMesh" uid="uid://dt0gu6cdtewdn" path="res://assets/tree_detailed.obj" id="5_xo3yn"]
+[ext_resource type="ArrayMesh" uid="uid://ccmjon5qakurf" path="res://assets/tent_detailedOpen.obj" id="6_jagpi"]
+[ext_resource type="ArrayMesh" uid="uid://b66ie53fafjtc" path="res://assets/tent_smallClosed.obj" id="7_uvme1"]
+[ext_resource type="ArrayMesh" uid="uid://b052tcd7sm6yu" path="res://assets/campfire_stones.obj" id="8_smlw2"]
+[ext_resource type="ArrayMesh" uid="uid://bl4ssgjguhw3" path="res://assets/rock_tallH.obj" id="9_nfe3u"]
+[ext_resource type="ArrayMesh" uid="uid://c5s7u8xe2kwgj" path="res://assets/tree_pineRoundD.obj" id="10_4fiwt"]
+[ext_resource type="ArrayMesh" uid="uid://ddpkslxxef312" path="res://assets/tree_thin.obj" id="11_kgutq"]
+[ext_resource type="ArrayMesh" uid="uid://bpfvflnheflh4" path="res://assets/cooking-fork.obj" id="12_1iqri"]
+[ext_resource type="ArrayMesh" uid="uid://cm2ltecoenphy" path="res://assets/pepper-mill.obj" id="13_mhlye"]
+[ext_resource type="ArrayMesh" uid="uid://b3nsvsp42hg0a" path="res://assets/rollingPin.obj" id="14_ovep5"]
+[ext_resource type="Script" uid="uid://c3mdj2xg55b2g" path="res://Henry.cs" id="15_7sqe0"]
+[ext_resource type="Script" uid="uid://bidhwa8pt8u7y" path="res://FairyManager.cs" id="16_dy46a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mwb40"]
 
@@ -134,8 +135,8 @@ public partial class LabelScript : Label
 }
 "
 
-[node name="Game" type="Node"]
-script = ExtResource("1_e8heu")
+[node name="LevelGame" type="Node"]
+script = ExtResource("1_dy46a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
@@ -144,7 +145,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_mwb40")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161697, 2.16023, -0.155624)
-script = ExtResource("1_80cx4")
+script = ExtResource("2_u1o6c")
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00187039, 0.00863838, -0.00316286)
@@ -167,7 +168,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_feb5d")
 
 [node name="Building-castle" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -37.8401, -1.7225, -55.4594)
-mesh = ExtResource("1_80nbo")
+mesh = ExtResource("3_y3nsb")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(0.704287, 0, 0.709915, 0, 1, 0, -0.709915, 0, 0.704287, 0, 0.370274, -99.4061)
@@ -184,76 +185,76 @@ omni_shadow_mode = 0
 [node name="Grass-forest" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 13.1753, -1.51245, -84.3762)
 gi_mode = 0
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
 
 [node name="Grass-forest2" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 33.1692, -1.51245, -84.1809)
 gi_mode = 0
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
 
 [node name="Grass-forest3" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -6.891, -1.51245, -85.6264)
 gi_mode = 0
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
 
 [node name="Grass-forest4" type="MeshInstance3D" parent="."]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, -18.7103, -0.947163, -90.4442)
 gi_mode = 0
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
 
 [node name="Grass-forest5" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 50.3402, -1.51245, -87.8491)
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
 
 [node name="Grass-forest6" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 92.2144, -1.51245, -93.2102)
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 surface_material_override/0 = SubResource("StandardMaterial3D_fc0e3")
 
 [node name="Grass-forest7" type="MeshInstance3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 15, 0, 0, 0, 9, 37.7991, -2.88258, -33.961)
-mesh = ExtResource("2_e2o6t")
+mesh = ExtResource("4_esa35")
 
 [node name="TreeDetailed" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -10.5013, 0.5, -9.16161)
-mesh = ExtResource("3_feb5d")
+mesh = ExtResource("5_xo3yn")
 
 [node name="TentDetailedOpen" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.948176, 0, 1.76095, 0, 2, 0, -1.76095, 0, 0.948176, -8.89487, 0.502223, -9.47154)
-mesh = ExtResource("4_fc0e3")
+mesh = ExtResource("6_jagpi")
 
 [node name="TentSmallClosed" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.59275, 0.5, -10.6348)
-mesh = ExtResource("5_7jktm")
+mesh = ExtResource("7_uvme1")
 
 [node name="TentSmallClosed2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.09796, 0, -1.022, 0, 1.5, 0, 1.022, 0, 1.09796, -5.00418, 0.45211, -9.61379)
-mesh = ExtResource("5_7jktm")
+mesh = ExtResource("7_uvme1")
 
 [node name="CampfireStones" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75887, 0.507415, -8.94014)
-mesh = ExtResource("6_j5wjh")
+mesh = ExtResource("8_smlw2")
 
 [node name="RockTallH" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.46803, 0, -0.175921, -0.023361, 0.396458, -0.0621509, 0.174363, 0.0531171, 0.463885, -6.76509, 0.507747, -8.92871)
-mesh = ExtResource("7_vef74")
+mesh = ExtResource("9_nfe3u")
 surface_material_override/0 = SubResource("StandardMaterial3D_mfdv2")
 surface_material_override/1 = SubResource("StandardMaterial3D_iotsf")
 
 [node name="TreePineRoundD" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.19225, 0, 0.076768, 0, 0.2, 0, -0.230304, 0, -0.0640834, -6.7261, 0.661605, -8.96066)
-mesh = ExtResource("8_hve3p")
+mesh = ExtResource("10_4fiwt")
 surface_material_override/0 = SubResource("StandardMaterial3D_lc2xo")
 
 [node name="TreePineRoundD" type="MeshInstance3D" parent="TreePineRoundD"]
 transform = Transform3D(-0.343606, 0.0202359, -0.0818219, 0.232182, 0.358631, -0.0215409, 0.43362, -0.175994, -0.0533027, 0.148052, 0.504068, -0.372158)
 material_override = SubResource("StandardMaterial3D_215e1")
-mesh = ExtResource("8_hve3p")
+mesh = ExtResource("10_4fiwt")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(9.3606, 0, 1.75921, 0, 1, 0, -3.51842, 0, 4.6803, 9.71539, -0.477459, -22.0897)
@@ -262,38 +263,39 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vef74")
 
 [node name="TreeThin" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 7.1909, 0.500001, -8.41821)
-mesh = ExtResource("9_vef74")
+mesh = ExtResource("11_kgutq")
 
 [node name="Cooking-fork" type="MeshInstance3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 1.9998, 0.0309088, 0, -0.0280989, 2.19978, -3.65686, -2.35983, 7.12704)
-mesh = ExtResource("12_215e1")
+mesh = ExtResource("12_1iqri")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26646, 0.850693, 7.93835)
 
 [node name="Pepper-mill" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(-8.74228e-08, 2.6, 0, -2, -1.1365e-07, 0, 0, 0, 2, -4.74941, 0.850642, 7.1299)
-mesh = ExtResource("10_iotsf")
+mesh = ExtResource("13_mhlye")
 surface_material_override/0 = SubResource("StandardMaterial3D_7sc4i")
 
 [node name="RollingPin" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -2.91048, 0.851, 7.13037)
-mesh = ExtResource("11_lc2xo")
+mesh = ExtResource("14_ovep5")
 surface_material_override/0 = SubResource("StandardMaterial3D_80cx4")
 
-[node name="henry" type="Node3D" parent="."]
+[node name="henry" type="Node3D" parent="." node_paths=PackedStringArray("henry")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0220615)
-script = ExtResource("15_7sc4i")
+script = ExtResource("15_7sqe0")
+henry = NodePath(".")
 
 [node name="gun" type="MeshInstance3D" parent="henry"]
 transform = Transform3D(3.82138e-15, -1.1365e-07, -2, -2, -1.1365e-07, 0, -8.74229e-08, 2.6, -8.74228e-08, 0, 1.469, -2.502)
-mesh = ExtResource("10_iotsf")
+mesh = ExtResource("13_mhlye")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_7sc4i")
 
 [node name="RollingPin" type="MeshInstance3D" parent="henry/gun"]
 transform = Transform3D(-4.37114e-08, -0.5, 0, 0.769231, -1.68121e-08, 0, 0, 0, 0.5, -0.000178814, 0.707281, 0.000235558)
-mesh = ExtResource("11_lc2xo")
+mesh = ExtResource("14_ovep5")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_80cx4")
 
@@ -301,3 +303,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_80cx4")
 offset_right = 805.0
 offset_bottom = 84.0
 script = SubResource("CSharpScript_7sc4i")
+
+[node name="Fairy Manager" type="Node" parent="."]
+script = ExtResource("16_dy46a")

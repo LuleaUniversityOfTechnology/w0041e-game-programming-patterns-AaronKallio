@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Transactions;
 
 public partial class GameManager : Node
 {
@@ -16,7 +17,8 @@ public partial class GameManager : Node
             }
         }
 
-        public string getScore()
+
+        public string GetScore()
     {
         
         var file = "res://data.txt";
@@ -29,7 +31,7 @@ public partial class GameManager : Node
 
     }
 
-    public void setScore(int score)
+    public void SetScore(int score)
     {
         
         var file = "res://data.txt";
@@ -39,12 +41,33 @@ public partial class GameManager : Node
        
 
     }
+    public int runs { get; set; } = 666;
+
+    public enum State
+{
+    menu, 
+    game
+}
+
+ public State currentState { get; set; } = State.menu;
+ 
+
+
 
     }
 
-    public override void _PhysicsProcess(double delta)
+
+    //public void addRuns()
+  //  {    
+   // }
+
+    public override void _Ready()
     {
-        GD.Print(GameManager.gameManagerSingleton.Instance.getScore());
-        GameManager.gameManagerSingleton.Instance.setScore(999);
+        
+        GD.Print(GameManager.gameManagerSingleton.Instance.GetScore());
+        GameManager.gameManagerSingleton.Instance.SetScore(999);
+        GD.Print(GameManager.gameManagerSingleton.Instance.runs);
+        GameManager.gameManagerSingleton.Instance.runs+=1;
+        GD.Print(GameManager.gameManagerSingleton.Instance.runs);
     }
 }
