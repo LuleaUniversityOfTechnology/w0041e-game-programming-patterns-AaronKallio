@@ -41,7 +41,7 @@ public partial class GameManager : Node
        
 
     }
-    public int runs { get; set; } = 666;
+    public int runs { get; set; } = 5;
 
     public enum State
 {
@@ -66,8 +66,5 @@ public partial class GameManager : Node
         
         GD.Print(GameManager.gameManagerSingleton.Instance.GetScore());
         GameManager.gameManagerSingleton.Instance.SetScore(999);
-        GD.Print(GameManager.gameManagerSingleton.Instance.runs);
-        GameManager.gameManagerSingleton.Instance.runs+=1;
-        GD.Print(GameManager.gameManagerSingleton.Instance.runs);
     }
 }
