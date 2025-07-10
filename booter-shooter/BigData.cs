@@ -3,7 +3,7 @@ using System;
 
 public partial class BigData : Node
 {
-
+    /*
     public static BigData instance;
 
     private PackedScene _gameScene = GD.Load<PackedScene>("res://game.tscn");
@@ -66,11 +66,11 @@ public void DeferredGotoScene(string path)
         CurrentScene = root.GetChild(-1);
         var global = GetNode<BigData>("/root/BigData");
         global.GotoScene("res://menu.tscn");
-        /*
+        
         GD.Print("aasdasfasfsd");
          instancedMenuScene = (Node2D)_menuScene.Instantiate();
          GetTree().Root.AddChild(instancedMenuScene);
-*/
+
 
 
 
@@ -97,6 +97,6 @@ public void DeferredGotoScene(string path)
         }
     }
 
-
+*/
     
 }

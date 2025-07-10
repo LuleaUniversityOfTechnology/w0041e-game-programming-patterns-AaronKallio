@@ -4,6 +4,7 @@ using System;
 public partial class StartButton : Button
 
 {
+    /*
     public static float fairyCount = 0;
     [Export]
     OptionButton fairies;
@@ -25,4 +26,5 @@ public partial class StartButton : Button
         global.GotoScene("res://game.tscn");
            
     }
+    */
 }

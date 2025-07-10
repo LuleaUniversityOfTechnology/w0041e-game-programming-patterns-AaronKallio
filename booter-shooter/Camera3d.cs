@@ -3,7 +3,7 @@ using System;
 
 public partial class Camera3d : Camera3D
 {
-
+/*
     [Export]
     Camera3D camera3D;
    
@@ -64,4 +64,5 @@ public override void _Input(InputEvent @event)
 
 
 }
+*/
 }

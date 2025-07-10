@@ -5,7 +5,7 @@ using System;
 
 public partial class fairyNode : Node3D
 {
-
+/*
 [Export]
 Node3D fairy;
 
@@ -77,18 +77,7 @@ State currentState;
         Camera3d.RaycastHitEvent += OnRaycastHit;
     }
 
-    /*
-    public void OnMySignalReceived(Vector3 clickTo)
-    {
-        GD.Print(clickTo);
-
-    }
-
-    public float OnMySignalReceived2(float number)
-    {
-        return number;
-    }
-*/
+   
     private void OnRaycastHit(Vector3 position)
     {
         //GD.Print($"Raycast hit at: {position}");
@@ -291,7 +280,7 @@ State currentState;
     }
        
     }
-
+    */
     }
 
 

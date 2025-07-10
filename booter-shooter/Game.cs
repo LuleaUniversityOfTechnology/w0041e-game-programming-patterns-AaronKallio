@@ -3,7 +3,7 @@ using System;
 
 public partial class Game : Node
 {
-    
+    /*
     [Export]
     public PackedScene bird_manager { get; set; }
 
@@ -43,5 +43,5 @@ public partial class Game : Node
     }
 
 
-    
+    */
 }
