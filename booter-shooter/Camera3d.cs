@@ -8,7 +8,6 @@ public partial class Camera3d : Camera3D
     Camera3D camera3D;
    
     public static event Action<Vector3> RaycastHitEvent;
-    private int _myVariable = 0;
 
     
     

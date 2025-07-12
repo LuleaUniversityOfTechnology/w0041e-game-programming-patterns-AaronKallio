@@ -1,7 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7plxtuvr5hn7"]
+[gd_scene load_steps=12 format=3 uid="uid://b7plxtuvr5hn7"]
 
 [ext_resource type="Script" uid="uid://bafy3wxl1s53e" path="res://fairy_script.cs" id="1_3dyfb"]
 [ext_resource type="ArrayMesh" uid="uid://c68i5eyp17w2y" path="res://assets/character-female-b.obj" id="2_6r41l"]
+
+[sub_resource type="Curve" id="Curve_3dyfb"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.011236), 0.0, 0.0, 0, 0, Vector2(0.154255, 0.213483), 0.0, 0.0, 0, 0, Vector2(0.202128, 0.775281), 0.0, 0.0, 0, 0, Vector2(0.287234, 0.325843), 0.0, 0.0, 0, 0, Vector2(0.382979, -0.505618), 0.0, 0.0, 0, 0, Vector2(0.468085, -0.235955), 0.0, 0.0, 0, 0, Vector2(0.553191, -0.685393), 0.0, 0.0, 0, 0, Vector2(0.643617, 0.707865), 0.0, 0.0, 0, 0, Vector2(0.659575, 0.235955), 0.0, 0.0, 0, 0, Vector2(0.81383, 0.910112), 0.0, 0.0, 0, 0, Vector2(0.904255, -0.685393), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 12
+
+[sub_resource type="Curve" id="Curve_6r41l"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -0.011236), 0.0, 0.0, 0, 0, Vector2(0.18617, 0.101124), 0.0, 0.0, 0, 0, Vector2(0.191489, 0.52809), 0.0, 0.0, 0, 0, Vector2(0.218085, 0.955056), 0.0, 0.0, 0, 0, Vector2(0.276596, -0.640449), 0.0, 0.0, 0, 0, Vector2(0.425532, 0.842697), 0.0, 0.0, 0, 0, Vector2(0.457447, 0.595506), 0.0, 0.0, 0, 0, Vector2(0.457457, 0.348315), 0.0, 0.0, 0, 0, Vector2(0.542553, 0.303371), 0.0, 0.0, 0, 0, Vector2(0.585106, 0.595506), 0.0, 0.0, 0, 0, Vector2(0.680851, -0.191011), 0.0, 0.0, 0, 0, Vector2(0.755319, 0.0786517), 0.0, 0.0, 0, 0, Vector2(0.861702, -0.168539), 0.0, 0.0, 0, 0, Vector2(0.893617, 0.146067), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 15
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn7yo"]
 albedo_color = Color(0.0705882, 1, 1, 1)
@@ -42,9 +52,12 @@ material = SubResource("StandardMaterial3D_rvswv")
 radius = 0.2
 height = 0.4
 
-[node name="FairyScene" type="Node3D" node_paths=PackedStringArray("fairy", "blood")]
+[node name="FairyScene" type="Node3D" node_paths=PackedStringArray("fairy", "body", "blood")]
 script = ExtResource("1_3dyfb")
 fairy = NodePath(".")
+body = NodePath("fairy/RigidBody3D/CollisionShape3D")
+fairyCurve1 = SubResource("Curve_3dyfb")
+fairyCurve2 = SubResource("Curve_6r41l")
 blood = NodePath("blood")
 
 [node name="fairy" type="MeshInstance3D" parent="."]

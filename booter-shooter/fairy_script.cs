@@ -3,14 +3,15 @@ using System;
 
 public partial class fairy_script : Node3D
 {
-    enum State
+    
+   public enum State
     {
         spawn,
         move,
         reset
     }
 
-    State currentState;
+    public State currentState;
 
 
     [Export]
@@ -47,14 +48,14 @@ public partial class fairy_script : Node3D
     int xFlipper;
     float speedMaker = (float)GD.RandRange(0.5, 3.0);
     int sideSpawn = GD.RandRange(0, 1);
-    bool hit = false;
+    public bool hit = false;
 
     Vector3 clickTo;
 
     private Camera3D _camera;
     private RayCast3D rayCast;
 
-
+/*
     public override void _Ready()
     {
         rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
@@ -267,4 +268,58 @@ public partial class fairy_script : Node3D
 
         }
     }
+*/
+public override void _Ready()
+    {
+        Position = new Vector3(0,5,-10);
+        rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
+        rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
+        //fairyReady();
+        currentState = State.move;
+        //_camera = GetNode<Camera3D>("level_game/Camera3D");  // Adjust path as needed
+        Camera3d.RaycastHitEvent += OnRaycastHit;
+    }
+
+    private void OnRaycastHit(Vector3 position)
+    {
+        //GD.Print($"Raycast hit at: {position}");
+        clickTo = position;
+
+    }
+public override void _PhysicsProcess(double delta)
+    {
+        //Position = new Vector3(0,0,-10);
+                Camera3d.RaycastHitEvent += OnRaycastHit;
+        rayCast.TargetPosition = clickTo;
+
+        //GD.Print(rayCast.TargetPosition);
+        //if(rayCast.IsColliding()){
+
+
+        var collider = rayCast.GetCollider();
+
+
+       
+        if (collider == collision)
+        {
+            //GD.Print("cum");
+            //hit = true;
+           // bloodY = y;
+           // score++;
+           // totalScore++;
+          //  GD.Print(bloodY);
+          //  blood.Position = new Vector3(0, bloodY + 3, 0);
+          //  blood.Emitting = true;
+        }
+        if (hit == true)
+        {
+            //GD.Print("fart");
+            //currentState = State.reset;
+            // Vector3 movement = new Vector3(0, -3, 0);
+            // fairy.SetPosition(movement);
+            // body.SetPosition(movement);
+        }
+
+
+        }
 }
