@@ -14,14 +14,14 @@ public partial class fairy_script : Node3D
     public State currentState;
 
 
-    [Export]
-    Node3D fairy;
+   // [Export]
+   // Node3D fairy;
 
     //[Export]
     //RayCast3D raycast;
 
-    [Export]
-    Node3D body;
+ //   [Export]
+   // Node3D body;
 
     [Export]
     Curve fairyCurve1;
@@ -32,8 +32,8 @@ public partial class fairy_script : Node3D
     [Export]
     GpuParticles3D blood;
 
-    [Export]
-    Node3D collision;
+   // [Export]
+   // Node3D collision;
 
     Curve currentCurve;
     float count = 0;
@@ -271,55 +271,60 @@ public partial class fairy_script : Node3D
 */
 public override void _Ready()
     {
-        Position = new Vector3(0,5,-10);
-        rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
-        rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
-        //fairyReady();
-        currentState = State.move;
-        //_camera = GetNode<Camera3D>("level_game/Camera3D");  // Adjust path as needed
-        Camera3d.RaycastHitEvent += OnRaycastHit;
+        Position = new Vector3(0,5,-5);
+       // rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
+       // rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
+        
+      //  Camera3d.RaycastHitEvent += OnRaycastHit;
     }
 
     private void OnRaycastHit(Vector3 position)
     {
-        //GD.Print($"Raycast hit at: {position}");
-        clickTo = position;
+       
+      //  clickTo = position;
+       
+
+    }
+    
+    public void test()
+    {
+
+        GD.Print("wors");
+       
 
     }
 public override void _PhysicsProcess(double delta)
     {
-        //Position = new Vector3(0,0,-10);
-                Camera3d.RaycastHitEvent += OnRaycastHit;
-        rayCast.TargetPosition = clickTo;
 
-        //GD.Print(rayCast.TargetPosition);
-        //if(rayCast.IsColliding()){
+        //  Camera3d.RaycastHitEvent += OnRaycastHit;
+        // rayCast.TargetPosition = clickTo;
 
 
-        var collider = rayCast.GetCollider();
+
+        // var collider = rayCast.GetCollider();
 
 
-       
-        if (collider == collision)
-        {
-            //GD.Print("cum");
-            //hit = true;
-           // bloodY = y;
-           // score++;
-           // totalScore++;
-          //  GD.Print(bloodY);
-          //  blood.Position = new Vector3(0, bloodY + 3, 0);
-          //  blood.Emitting = true;
-        }
-        if (hit == true)
-        {
-            //GD.Print("fart");
-            //currentState = State.reset;
-            // Vector3 movement = new Vector3(0, -3, 0);
-            // fairy.SetPosition(movement);
-            // body.SetPosition(movement);
-        }
+        /*
+         if (collider == collision)
+         {
+             GD.Print("cum");
+             hit = true;
+             bloodY = y;
+             score++;
+             totalScore++;
+             GD.Print(bloodY);
+             blood.Position = new Vector3(0, bloodY + 3, 0);
+             blood.Emitting = true;
+         }
+         if (hit == true)
+         {
+             GD.Print("fart");
+             currentState = State.reset;
+             Vector3 movement = new Vector3(100, -3, 100);
+             fairy.SetPosition(movement);
+             body.SetPosition(movement);
+         }
+ */
 
-
-        }
+    }
 }

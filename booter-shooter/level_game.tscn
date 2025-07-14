@@ -1,6 +1,5 @@
-[gd_scene load_steps=37 format=3 uid="uid://dwliyvacngogi"]
+[gd_scene load_steps=38 format=3 uid="uid://dwliyvacngogi"]
 
-[ext_resource type="Script" uid="uid://vyhegqak2nwy" path="res://Game.cs" id="1_dy46a"]
 [ext_resource type="Script" uid="uid://ceg4kuj7qsdx0" path="res://Camera3d.cs" id="2_u1o6c"]
 [ext_resource type="ArrayMesh" uid="uid://drobjgahakiss" path="res://assets/building-castle.obj" id="3_y3nsb"]
 [ext_resource type="ArrayMesh" uid="uid://b8xp25ah6u7ml" path="res://assets/grass-forest.obj" id="4_esa35"]
@@ -135,8 +134,13 @@ public partial class LabelScript : Label
 }
 "
 
+[sub_resource type="BoxMesh" id="BoxMesh_a5b78"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dy46a"]
+points = PackedVector3Array(5, 5, 5, 5, 5, -5, -5, 5, 5, 5, -5, 5, 5, -5, -5, -5, 5, -5, -5, -5, 5, -5, -5, -5)
+
 [node name="LevelGame" type="Node"]
-script = ExtResource("1_dy46a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
@@ -146,10 +150,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_mwb40")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161697, 2.16023, -0.155624)
 script = ExtResource("2_u1o6c")
-
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00187039, 0.00863838, -0.00316286)
-target_position = Vector3(0, 0, -10)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.74228e-08, -50, 0, 2, -2.18557e-06, 0, 0, 0, 1, 0, -0.00389457, -3.4507)
@@ -306,3 +306,21 @@ script = SubResource("CSharpScript_7sc4i")
 
 [node name="Fairy Manager" type="Node" parent="."]
 script = ExtResource("16_dy46a")
+
+[node name="box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9181, 1.70391, -21.4445)
+mesh = SubResource("BoxMesh_a5b78")
+
+[node name="box body" type="StaticBody3D" parent="box"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box/box body"]
+shape = SubResource("ConvexPolygonShape3D_dy46a")
+
+[node name="box2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0055, 1.70391, -21.4445)
+mesh = SubResource("BoxMesh_a5b78")
+
+[node name="box dddd" type="StaticBody3D" parent="box2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box2/box dddd"]
+shape = SubResource("ConvexPolygonShape3D_dy46a")
