@@ -3,14 +3,18 @@ using System;
 
 public partial class fairy_script : Node3D
 {
-    
-   public enum State
+
+
+    //[Signal]
+    // public delegate void ResetEventHandler();
+    public enum State
     {
         spawn,
         move,
-        reset
+        reset,
+        idle
     }
-
+    public int fairyNum; 
     public State currentState;
 
 
@@ -31,9 +35,12 @@ public partial class fairy_script : Node3D
 
     [Export]
     GpuParticles3D blood;
+    
+    //[Export]
+    //Node3D fairyBox;
 
    // [Export]
-   // Node3D collision;
+    // Node3D collision;
 
     Curve currentCurve;
     float count = 0;
@@ -55,276 +62,374 @@ public partial class fairy_script : Node3D
     private Camera3D _camera;
     private RayCast3D rayCast;
 
-/*
+    /*
+        public override void _Ready()
+        {
+            rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
+            rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
+            //fairyReady();
+            currentState = State.move;
+            _camera = GetNode<Camera3D>("game/Camera3D");  // Adjust path as needed
+            Camera3d.RaycastHitEvent += OnRaycastHit;
+        }
+
+        private void OnRaycastHit(Vector3 position)
+        {
+            //GD.Print($"Raycast hit at: {position}");
+            clickTo = position;
+
+        }
+        public void fairyXsetter()
+        {
+            xFlipper = GD.RandRange(0, 1);
+            if (xFlipper == 0)
+            {
+                x = -10;
+            }
+            else
+            {
+                x = 10;
+            }
+        }
+
+
+
+        public void fairyYsetter()
+        {
+            x = GD.RandRange(-5, 5);
+        }
+
+        public void fairyReady()
+        {
+            z = GD.RandRange(-5, -20);
+            if (sideSpawn == 1)
+            {
+                fairyXsetter();
+            }
+            else
+            {
+                y = 0;
+                fairyYsetter();
+            }
+
+
+        }
+
+
+        public void fairyMoverX(double delta)
+        {
+            timer += delta / 5;
+            if (timer > 1)
+            {
+                timer = 0;
+            }
+            if (graphSelector == 0)
+            {
+                y = 3 + fairyCurve1.Sample((float)timer);
+            }
+            else
+            {
+                y = 3 + fairyCurve2.Sample((float)timer);
+            }
+
+            if (xFlipper == 0)
+            {
+                x += 0.04f * speedMaker;
+            }
+            else
+            {
+                x -= 0.04f * speedMaker;
+            }
+
+        }
+
+        public void resetZone(double delta)
+        {
+            //Vector3 movement = new Vector3(1, 5, 1);
+            hit = false;
+            currentState = State.spawn;
+
+
+        }
+
+        public void fairyMoverY(double delta)
+        {
+            timer += delta / 10;
+            if (timer > 1)
+            {
+                timer = 0;
+            }
+            if (graphSelector == 0)
+            {
+                x = x + (fairyCurve1.Sample((float)timer) / 10);
+            }
+            else
+            {
+                x = x + (fairyCurve2.Sample((float)timer) / 10);
+            }
+
+            y += 0.04f;
+        }
+
+        public void fairyRaytrace()
+        {
+            Camera3d.RaycastHitEvent += OnRaycastHit;
+            rayCast.TargetPosition = clickTo;
+
+            //GD.Print(rayCast.TargetPosition);
+            //if(rayCast.IsColliding()){
+
+
+            var collider = rayCast.GetCollider();
+
+
+
+            if (collider == collision)
+            {
+                hit = true;
+                bloodY = y;
+                score++;
+                totalScore++;
+                //GD.Print(bloodY);
+                blood.Position = new Vector3(0, bloodY + 3, 0);
+                blood.Emitting = true;
+            }
+            if (hit == true)
+            {
+                currentState = State.reset;
+                Vector3 movement = new Vector3(x, -3, z);
+                fairy.SetPosition(movement);
+                body.SetPosition(movement);
+            }
+
+        }
+
+        bool fairyOutOfBounds()
+        {
+            if (y > 20 || x > 30 || x < -30)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        void handleFairy(double delta)
+        {
+
+
+            switch (currentState)
+            {
+                case State.spawn:
+                    z = GD.RandRange(-5, -20);
+                    fairyReady();
+                    break;
+
+                case State.move:
+                    if (sideSpawn == 1)
+                    {
+                        fairyMoverX(delta);
+                    }
+                    else
+                    {
+                        fairyMoverY(delta);
+                    }
+
+                    Vector3 movement = new Vector3(x, y, z);
+                    fairy.SetPosition(movement);
+                    body.SetPosition(movement);
+                    break;
+                case State.reset:
+                    resetZone(delta);
+                    break;
+            }
+
+
+        }
+
+
+        void fairyReset()
+        {
+            if (fairyOutOfBounds())
+            {
+                Vector3 movement = new Vector3(0, -3, 0);
+                fairy.SetPosition(movement);
+                body.SetPosition(movement);
+
+
+            }
+
+
+            currentState = State.reset;
+
+        }
+
+        public override void _PhysicsProcess(double delta)
+        {
+
+            fairyRaytrace();
+            handleFairy(delta);
+            fairyReset();
+            if (Input.IsActionPressed("exit"))
+            {
+
+
+            }
+        }
+    */
     public override void _Ready()
     {
-        rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
-        rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
-        //fairyReady();
-        currentState = State.move;
-        _camera = GetNode<Camera3D>("game/Camera3D");  // Adjust path as needed
-        Camera3d.RaycastHitEvent += OnRaycastHit;
-    }
+        Position = new Vector3(0, 5, -5);
+        // rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
+        // rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
 
-    private void OnRaycastHit(Vector3 position)
-    {
-        //GD.Print($"Raycast hit at: {position}");
-        clickTo = position;
-
-    }
-    public void fairyXsetter()
-    {
-        xFlipper = GD.RandRange(0, 1);
-        if (xFlipper == 0)
-        {
-            x = -10;
-        }
-        else
-        {
-            x = 10;
-        }
+        //  Camera3d.RaycastHitEvent += OnRaycastHit;
+        //var fairyHit = GetNode<FairyBox>("fairy_scene/FairyBox");
+        // fairyBox.Connect(FairyBox.SignalName.Hit, new Callable(this, nameof(whenHit)));
+        var manager = GetNode<FairyManager>("/root/LevelGame");
+        manager.Connect(FairyManager.SignalName.RunStart, new Callable(this, nameof(Start)));
+        currentState = State.idle;
     }
 
 
-
-    public void fairyYsetter()
+    public void Hit()
     {
-        x = GD.RandRange(-5, 5);
-    }
+        currentState = State.idle;
+        GD.Print("brudda");
+        
+        //GetTree().Root.PrintTreePretty();
+        FairyManager.FairyManagerSingleton.Instance.fairysReset += 1;
+}
 
-    public void fairyReady()
+
+    public void Start()
     {
-        z = GD.RandRange(-5, -20);
-        if (sideSpawn == 1)
-        {
-            fairyXsetter();
-        }
-        else
-        {
-            y = 0;
-            fairyYsetter();
-        }
-
-
-    }
-
-
-    public void fairyMoverX(double delta)
-    {
-        timer += delta / 5;
-        if (timer > 1)
-        {
-            timer = 0;
-        }
-        if (graphSelector == 0)
-        {
-            y = 3 + fairyCurve1.Sample((float)timer);
-        }
-        else
-        {
-            y = 3 + fairyCurve2.Sample((float)timer);
-        }
-
-        if (xFlipper == 0)
-        {
-            x += 0.04f * speedMaker;
-        }
-        else
-        {
-            x -= 0.04f * speedMaker;
-        }
-
-    }
-
-    public void resetZone(double delta)
-    {
-        //Vector3 movement = new Vector3(1, 5, 1);
-        hit = false;
-        currentState = State.spawn;
-
-
-    }
-
-    public void fairyMoverY(double delta)
-    {
-        timer += delta / 10;
-        if (timer > 1)
-        {
-            timer = 0;
-        }
-        if (graphSelector == 0)
-        {
-            x = x + (fairyCurve1.Sample((float)timer) / 10);
-        }
-        else
-        {
-            x = x + (fairyCurve2.Sample((float)timer) / 10);
-        }
-
-        y += 0.04f;
-    }
-
-    public void fairyRaytrace()
-    {
-        Camera3d.RaycastHitEvent += OnRaycastHit;
-        rayCast.TargetPosition = clickTo;
-
-        //GD.Print(rayCast.TargetPosition);
-        //if(rayCast.IsColliding()){
-
-
-        var collider = rayCast.GetCollider();
-
-
-
-        if (collider == collision)
-        {
-            hit = true;
-            bloodY = y;
-            score++;
-            totalScore++;
-            //GD.Print(bloodY);
-            blood.Position = new Vector3(0, bloodY + 3, 0);
-            blood.Emitting = true;
-        }
-        if (hit == true)
+        if (fairyNum >= GameManager.gameManagerSingleton.Instance.runs)
         {
             currentState = State.reset;
-            Vector3 movement = new Vector3(x, -3, z);
-            fairy.SetPosition(movement);
-            body.SetPosition(movement);
         }
+        //GetTree().Root.PrintTreePretty();
+}
 
-    }
-
-    bool fairyOutOfBounds()
+    private void PoolPlacer()
     {
-        if (y > 20 || x > 30 || x < -30)
+        Position = new Vector3(0, 0,100);
+    }
+    public void fairyXsetter()
         {
-            return true;
+            xFlipper = GD.RandRange(0, 1);
+            if (xFlipper == 0)
+            {
+                x = -10;
+            }
+            else
+            {
+                x = 10;
+            }
         }
-        return false;
-    }
 
-    void handleFairy(double delta)
+
+
+        public void fairyYsetter()
+        {
+            x = GD.RandRange(-5, 5);
+        }
+        public void FairyReady()
+        {
+            z = GD.RandRange(-5, -20);
+            if (sideSpawn == 1)
+            {
+                fairyXsetter();
+            }
+            else
+            {
+                y = 0;
+                fairyYsetter();
+            }
+
+        currentState = State.move;
+        }
+
+        public void FairyMove(double delta)
+        {
+            if (sideSpawn == 1)
+                    {
+                        fairyMoverX(delta);
+                    }
+                    else
+                    {
+                        fairyMoverY(delta);
+                    }
+        }
+
+        public void fairyMoverX(double delta)
+        {
+            timer += delta / 5;
+            if (timer > 1)
+            {
+                timer = 0;
+            }
+            if (graphSelector == 0)
+            {
+                y = 3 + fairyCurve1.Sample((float)timer);
+            }
+            else
+            {
+                y = 3 + fairyCurve2.Sample((float)timer);
+            }
+
+            if (xFlipper == 0)
+            {
+                x += 0.04f * speedMaker;
+            }
+            else
+            {
+                x -= 0.04f * speedMaker;
+            }
+
+        }
+        public void fairyMoverY(double delta)
+        {
+            timer += delta / 10;
+            if (timer > 1)
+            {
+                timer = 0;
+            }
+            if (graphSelector == 0)
+            {
+                x = x + (fairyCurve1.Sample((float)timer) / 10);
+            }
+            else
+            {
+                x = x + (fairyCurve2.Sample((float)timer) / 10);
+            }
+
+            y += 0.04f;
+        }
+
+        
+    public void StateExecute(double delta)
     {
-
-
         switch (currentState)
         {
-            case State.spawn:
-                z = GD.RandRange(-5, -20);
-                fairyReady();
+            case State.idle:
+                PoolPlacer();
                 break;
 
             case State.move:
-                if (sideSpawn == 1)
-                {
-                    fairyMoverX(delta);
-                }
-                else
-                {
-                    fairyMoverY(delta);
-                }
-
-                Vector3 movement = new Vector3(x, y, z);
-                fairy.SetPosition(movement);
-                body.SetPosition(movement);
+                FairyMove(delta);
                 break;
+
             case State.reset:
-                resetZone(delta);
+                FairyReady();
+                break;
+            case State.spawn:
                 break;
         }
 
-
     }
-
-
-    void fairyReset()
-    {
-        if (fairyOutOfBounds())
-        {
-            Vector3 movement = new Vector3(0, -3, 0);
-            fairy.SetPosition(movement);
-            body.SetPosition(movement);
-
-
-        }
-
-
-        currentState = State.reset;
-
-    }
-
     public override void _PhysicsProcess(double delta)
     {
-
-        fairyRaytrace();
-        handleFairy(delta);
-        fairyReset();
-        if (Input.IsActionPressed("exit"))
-        {
-
-
-        }
-    }
-*/
-public override void _Ready()
-    {
-        Position = new Vector3(0,5,-5);
-       // rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
-       // rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
-        
-      //  Camera3d.RaycastHitEvent += OnRaycastHit;
-    }
-
-    private void OnRaycastHit(Vector3 position)
-    {
-       
-      //  clickTo = position;
-       
-
-    }
-    
-    public void test()
-    {
-
-        GD.Print("wors");
-       
-
-    }
-public override void _PhysicsProcess(double delta)
-    {
-
-        //  Camera3d.RaycastHitEvent += OnRaycastHit;
-        // rayCast.TargetPosition = clickTo;
-
-
-
-        // var collider = rayCast.GetCollider();
-
-
-        /*
-         if (collider == collision)
-         {
-             GD.Print("cum");
-             hit = true;
-             bloodY = y;
-             score++;
-             totalScore++;
-             GD.Print(bloodY);
-             blood.Position = new Vector3(0, bloodY + 3, 0);
-             blood.Emitting = true;
-         }
-         if (hit == true)
-         {
-             GD.Print("fart");
-             currentState = State.reset;
-             Vector3 movement = new Vector3(100, -3, 100);
-             fairy.SetPosition(movement);
-             body.SetPosition(movement);
-         }
- */
-
+        StateExecute(delta);
+        GD.Print(currentState);
     }
 }

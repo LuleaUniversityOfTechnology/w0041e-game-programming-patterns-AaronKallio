@@ -141,6 +141,7 @@ size = Vector3(10, 10, 10)
 points = PackedVector3Array(5, 5, 5, 5, 5, -5, -5, 5, 5, 5, -5, 5, 5, -5, -5, -5, 5, -5, -5, -5, 5, -5, -5, -5)
 
 [node name="LevelGame" type="Node"]
+script = ExtResource("16_dy46a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
@@ -305,10 +306,10 @@ offset_bottom = 84.0
 script = SubResource("CSharpScript_7sc4i")
 
 [node name="Fairy Manager" type="Node" parent="."]
-script = ExtResource("16_dy46a")
 
 [node name="box" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9181, 1.70391, -21.4445)
+visible = false
 mesh = SubResource("BoxMesh_a5b78")
 
 [node name="box body" type="StaticBody3D" parent="box"]
@@ -318,6 +319,7 @@ shape = SubResource("ConvexPolygonShape3D_dy46a")
 
 [node name="box2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0055, 1.70391, -21.4445)
+visible = false
 mesh = SubResource("BoxMesh_a5b78")
 
 [node name="box dddd" type="StaticBody3D" parent="box2"]

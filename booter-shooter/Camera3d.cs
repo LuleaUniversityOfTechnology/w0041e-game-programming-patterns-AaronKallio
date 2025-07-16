@@ -50,15 +50,10 @@ public partial class Camera3d : Camera3D
         {
             var collision = raycast.GetCollider();
             var collider = intersection["collider"] as Object;
-            //var collision = collider as CollisionObject3D;
-            if (collision.HasMethod("test"))
+            if (collision.HasMethod("Hit"))
             {
-                collision.Call("test");
+                collision.Call("Hit");
                 GD.Print(collider);
-                // collision.Call("test");
-                // if (collision.IsInGroup("fairy")){
-                //     GD.Print("ggggg");
-                //  }
 
             }
         }
