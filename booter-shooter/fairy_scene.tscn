@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7plxtuvr5hn7"]
+[gd_scene load_steps=12 format=3 uid="uid://b7plxtuvr5hn7"]
 
 [ext_resource type="Script" uid="uid://bafy3wxl1s53e" path="res://fairy_script.cs" id="1_3dyfb"]
 [ext_resource type="ArrayMesh" uid="uid://c68i5eyp17w2y" path="res://assets/character-female-b.obj" id="2_6r41l"]
@@ -49,6 +49,8 @@ grow_amount = 0.02
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6r41l"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6r41l"]
+
 [node name="FairyScene" type="CharacterBody3D" node_paths=PackedStringArray("blood") groups=["fairy"]]
 script = ExtResource("1_3dyfb")
 fairyCurve1 = SubResource("Curve_3dyfb")
@@ -81,6 +83,10 @@ omni_range = 9.791
 omni_attenuation = 3.13
 
 [node name="FairyBox" type="CollisionShape3D" parent="." groups=["fairy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.26574, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.37212, 0)
 shape = SubResource("CapsuleShape3D_6r41l")
 script = ExtResource("3_6r41l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FairyBox"]
+visible = false
+mesh = SubResource("CapsuleMesh_6r41l")

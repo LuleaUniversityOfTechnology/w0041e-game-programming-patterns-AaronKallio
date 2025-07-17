@@ -34,9 +34,9 @@ public partial class FairyManager : Node
   public int runs;
   //public int currentRuns = 1;
 
-  public int currentFairys;
+  public int currentFairys = 1;
 
-  public bool runReset = true;
+  public bool runReset = false;
   public List<fairy_script> fairyPool = new List<fairy_script>();
   PackedScene fairyScene = GD.Load<PackedScene>("res://fairy_scene.tscn");
 
@@ -48,9 +48,10 @@ public partial class FairyManager : Node
       fairy_script fairy = fairyScene.Instantiate<fairy_script>();
       AddChild(fairy);
       fairyPool.Add(fairy);
-      GD.Print(runs);
+      //GD.Print(GameManager.gameManagerSingleton.Instance.runs);
       fairyPool[i].fairyNum = i + 1;
-      FairyWave();
+      EmitSignal(SignalName.RunStart);
+      //FairyWave();
 
 
       //var fairyNode = GetNode<fairy_script>("res://fairy_scene/FairyScene"); // Adjust path as needed
@@ -67,8 +68,11 @@ public partial class FairyManager : Node
   {
     if (runReset == false)
     {
+
       EmitSignal(SignalName.RunStart);
       runReset = true;
+      
+
     }
     //EmitSignal(SignalName.RunStart);
 
@@ -79,17 +83,20 @@ public partial class FairyManager : Node
     if (FairyManagerSingleton.Instance.fairysReset == FairyManagerSingleton.Instance.currentRuns)
     {
       FairyManagerSingleton.Instance.fairysReset = 0;
+      FairyManagerSingleton.Instance.currentRuns += 1;
       runReset = false;
-      if (currentFairys < GameManager.gameManagerSingleton.Instance.runs)
-      {
-        currentFairys++;
-      }
+      FairyWave();
+      //if (currentFairys < FairyManagerSingleton.Instance.currentRuns)
+      // {
+      //   currentFairys++;
+      // }
     }
   }
 
   public override void _PhysicsProcess(double delta)
   {
-    FairyWave();
+
     ResetCount();
+    
   }
 }

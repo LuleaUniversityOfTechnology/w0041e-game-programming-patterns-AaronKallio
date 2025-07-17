@@ -278,7 +278,7 @@ public partial class fairy_script : Node3D
     */
     public override void _Ready()
     {
-        Position = new Vector3(0, 5, -5);
+        //Position = new Vector3(0, 5, -5);
         // rayCast = GetTree().Root.FindChild("RayCast3D", true, false) as RayCast3D;
         // rayCast.TargetPosition = new Vector3(0, 10, 0); // Cast 10 units downward
 
@@ -288,6 +288,7 @@ public partial class fairy_script : Node3D
         var manager = GetNode<FairyManager>("/root/LevelGame");
         manager.Connect(FairyManager.SignalName.RunStart, new Callable(this, nameof(Start)));
         currentState = State.idle;
+        
     }
 
 
@@ -303,7 +304,7 @@ public partial class fairy_script : Node3D
 
     public void Start()
     {
-        if (fairyNum >= GameManager.gameManagerSingleton.Instance.runs)
+        if (fairyNum <= FairyManager.FairyManagerSingleton.Instance.currentRuns)
         {
             currentState = State.reset;
         }
@@ -349,17 +350,18 @@ public partial class fairy_script : Node3D
         currentState = State.move;
         }
 
-        public void FairyMove(double delta)
+    public void FairyMove(double delta)
+    {
+        if (sideSpawn == 1)
         {
-            if (sideSpawn == 1)
-                    {
-                        fairyMoverX(delta);
-                    }
-                    else
-                    {
-                        fairyMoverY(delta);
-                    }
+            fairyMoverX(delta);
         }
+        else
+        {
+            fairyMoverY(delta);
+        }
+        Position = new Vector3(x,y,z);
+    }
 
         public void fairyMoverX(double delta)
         {
@@ -406,6 +408,19 @@ public partial class fairy_script : Node3D
             y += 0.04f;
         }
 
+
+        void fairyOutOfBounds()
+        {
+        //GD.Print(x, " ", y, " ", z);
+        if (y > 20 || x > 30 || x < -30)
+        {
+            //GD.Print("penis");
+            currentState = State.idle;
+            FairyManager.FairyManagerSingleton.Instance.fairysReset += 1;
+        }
+           
+        }
+
         
     public void StateExecute(double delta)
     {
@@ -417,6 +432,7 @@ public partial class fairy_script : Node3D
 
             case State.move:
                 FairyMove(delta);
+                fairyOutOfBounds();
                 break;
 
             case State.reset:
@@ -429,7 +445,12 @@ public partial class fairy_script : Node3D
     }
     public override void _PhysicsProcess(double delta)
     {
+        //GD.Print(currentState);
+        //GD.Print("x = ", x , " y =", y, " z= ",z);
+        //GD.Print(FairyManager.FairyManagerSingleton.Instance.fairysReset);
+        GD.Print(fairyNum, " ", currentState);
         StateExecute(delta);
-        GD.Print(currentState);
+        
+        
     }
 }
