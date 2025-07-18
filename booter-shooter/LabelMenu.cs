@@ -3,7 +3,7 @@ using System;
 
 public partial class LabelMenu : Label
 {
-    /*
+    
     public override void _Ready()
     {
         var file = "res://data.txt";
@@ -22,5 +22,5 @@ public partial class LabelMenu : Label
       
        
     }
-    */
+   
 }

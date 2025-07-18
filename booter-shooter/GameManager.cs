@@ -50,21 +50,10 @@ public partial class GameManager : Node
 }
 
  public State currentState { get; set; } = State.menu;
- 
-
-
-
     }
 
-
-    //public void addRuns()
-  //  {    
-   // }
-
     public override void _Ready()
-    {
-        
+    {   
         GD.Print(GameManager.gameManagerSingleton.Instance.GetScore());
-        GameManager.gameManagerSingleton.Instance.SetScore(999);
     }
 }
