@@ -134,7 +134,7 @@ mesh = SubResource("CapsuleMesh_mwb40")
 surface_material_override/0 = SubResource("StandardMaterial3D_80nbo")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 0.5, 0.0237122, -0.444659, -99.9542)
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 0.5, -0.315338, -0.444658, -99.9296)
 mesh = SubResource("BoxMesh_80nbo")
 surface_material_override/0 = SubResource("StandardMaterial3D_e2o6t")
 

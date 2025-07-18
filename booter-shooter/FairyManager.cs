@@ -53,33 +53,19 @@ public partial class FairyManager : Node
       fairy_script fairy = fairyScene.Instantiate<fairy_script>();
       AddChild(fairy);
       fairyPool.Add(fairy);
-      //GD.Print(GameManager.gameManagerSingleton.Instance.runs);
       fairyPool[i].fairyNum = i + 1;
       EmitSignal(SignalName.RunStart);
-      //FairyWave();
-
-
-      //var fairyNode = GetNode<fairy_script>("res://fairy_scene/FairyScene"); // Adjust path as needed
-
-      //fairyNode.Connect(fairy_script.SignalName.Reset, new Callable(this, nameof(ResetCount)));
 
     }
-    //fairyPool[0].Position = new Vector3(5,5,-10);
-    // fairyPool[0].currentState = fairy_script.State.move;
-
   }
 
   public void FairyWave()
   {
     if (runReset == false)
     {
-
       EmitSignal(SignalName.RunStart);
       runReset = true;
-      
-
     }
-    //EmitSignal(SignalName.RunStart);
 
   }
 
@@ -88,12 +74,9 @@ public partial class FairyManager : Node
     if (FairyManagerSingleton.Instance.fairysReset == FairyManagerSingleton.Instance.currentRuns)
     {
       
-
       if (timer > 0)
       {
-        GD.Print(timer);
         RunLabel.LabelSingleton.Instance.text = "fairys hit in run: " + FairyManagerSingleton.Instance.fairysHitInRun;
-        GD.Print("yar");
         timer -= 1;
       }
       else
@@ -107,11 +90,6 @@ public partial class FairyManager : Node
         FairyWave();
         BackToMenu();
       }
-      
-      //if (currentFairys < FairyManagerSingleton.Instance.currentRuns)
-      // {
-      //   currentFairys++;
-      // }
     }
   }
   
@@ -120,14 +98,15 @@ public partial class FairyManager : Node
   {
     if (FairyManagerSingleton.Instance.currentRuns > GameManager.gameManagerSingleton.Instance.runs)
     {
-      //GD.Print("poo poo pee pee");
       GameManager.gameManagerSingleton.Instance.currentState = GameManager.gameManagerSingleton.State.menu;
       FairyManagerSingleton.Instance.currentRuns = 1;
       if (int.Parse(GameManager.gameManagerSingleton.Instance.GetScore()) < FairyManagerSingleton.Instance.fairyScore)
       {
+
         GameManager.gameManagerSingleton.Instance.SetScore(FairyManagerSingleton.Instance.fairyScore);
+       
       }
-      
+       FairyManagerSingleton.Instance.fairyScore = 0;
     }
   }
 

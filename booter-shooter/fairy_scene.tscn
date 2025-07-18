@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b7plxtuvr5hn7"]
+[gd_scene load_steps=8 format=3 uid="uid://b7plxtuvr5hn7"]
 
 [ext_resource type="Script" uid="uid://bafy3wxl1s53e" path="res://fairy_script.cs" id="1_3dyfb"]
 [ext_resource type="ArrayMesh" uid="uid://c68i5eyp17w2y" path="res://assets/character-female-b.obj" id="2_6r41l"]
-[ext_resource type="Script" uid="uid://dqwfe38n6gc57" path="res://FairyBox.cs" id="3_6r41l"]
 
 [sub_resource type="Curve" id="Curve_3dyfb"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
@@ -13,27 +12,6 @@ point_count = 12
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -0.011236), 0.0, 0.0, 0, 0, Vector2(0.18617, 0.101124), 0.0, 0.0, 0, 0, Vector2(0.191489, 0.52809), 0.0, 0.0, 0, 0, Vector2(0.218085, 0.955056), 0.0, 0.0, 0, 0, Vector2(0.276596, -0.640449), 0.0, 0.0, 0, 0, Vector2(0.425532, 0.842697), 0.0, 0.0, 0, 0, Vector2(0.457447, 0.595506), 0.0, 0.0, 0, 0, Vector2(0.457457, 0.348315), 0.0, 0.0, 0, 0, Vector2(0.542553, 0.303371), 0.0, 0.0, 0, 0, Vector2(0.585106, 0.595506), 0.0, 0.0, 0, 0, Vector2(0.680851, -0.191011), 0.0, 0.0, 0, 0, Vector2(0.755319, 0.0786517), 0.0, 0.0, 0, 0, Vector2(0.861702, -0.168539), 0.0, 0.0, 0, 0, Vector2(0.893617, 0.146067), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 15
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h6pu3"]
-particle_flag_align_y = true
-spread = 180.0
-initial_velocity_min = 12.0
-initial_velocity_max = 14.0
-scale_min = 0.5
-scale_max = 1.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvswv"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(0.372549, 0, 0, 1)
-clearcoat = 0.0
-refraction_scale = -1.0
-disable_receive_shadows = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o33tp"]
-material = SubResource("StandardMaterial3D_rvswv")
-radius = 0.2
-height = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn7yo"]
 albedo_color = Color(0.0705882, 1, 1, 1)
@@ -51,20 +29,10 @@ grow_amount = 0.02
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6r41l"]
 
-[node name="FairyScene" type="CharacterBody3D" node_paths=PackedStringArray("blood") groups=["fairy"]]
+[node name="FairyScene" type="CharacterBody3D" groups=["fairy"]]
 script = ExtResource("1_3dyfb")
 fairyCurve1 = SubResource("Curve_3dyfb")
 fairyCurve2 = SubResource("Curve_6r41l")
-blood = NodePath("blood")
-
-[node name="blood" type="GPUParticles3D" parent="."]
-emitting = false
-amount = 100
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 15
-process_material = SubResource("ParticleProcessMaterial_h6pu3")
-draw_pass_1 = SubResource("CapsuleMesh_o33tp")
 
 [node name="fairy" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.105803, 0)
@@ -82,10 +50,9 @@ light_specular = 3.7
 omni_range = 9.791
 omni_attenuation = 3.13
 
-[node name="FairyBox" type="CollisionShape3D" parent="." groups=["fairy"]]
+[node name="FairyBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.37212, 0)
 shape = SubResource("CapsuleShape3D_6r41l")
-script = ExtResource("3_6r41l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FairyBox"]
 visible = false

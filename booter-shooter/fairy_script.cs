@@ -5,7 +5,6 @@ public partial class fairy_script : Node3D
 {
     public enum State
     {
-        spawn,
         move,
         reset,
         idle
@@ -19,38 +18,35 @@ public partial class fairy_script : Node3D
     [Export]
     Curve fairyCurve2;
 
-    [Export]
-    GpuParticles3D blood;
+    //[Export]
+    //GpuParticles3D blood;
    
-    Curve currentCurve;
-    float count = 0;
+
+    
     float y = 3;
     double timer = 0;
     int graphSelector = GD.RandRange(0, 1);
     float z;
     float x;
-    float bloodY;
-    static public int score = 0;
-    static public int totalScore = 0;
     int xFlipper;
     float speedMaker = (float)GD.RandRange(3.0, 6.0);
     int sideSpawn = GD.RandRange(0, 1);
-    public bool hit = false;
-
-    Vector3 clickTo;
-
-    private Camera3D _camera;
-    private RayCast3D rayCast;
+    PackedScene blood;
 
     public override void _Ready()
     {
         var manager = GetNode<FairyManager>("/root/LevelGame");
         manager.Connect(FairyManager.SignalName.RunStart, new Callable(this, nameof(Start)));
         currentState = State.idle;
-        
+        blood = GD.Load<PackedScene>("res://blood.tscn");
+
     }
     public void Hit()
     {
+        var bloodShow = blood.Instantiate<GpuParticles3D>();
+        bloodShow.GlobalTransform = GlobalTransform;
+        GetTree().CurrentScene.AddChild(bloodShow);
+        bloodShow.Emitting = true;
         currentState = State.idle;
         FairyManager.FairyManagerSingleton.Instance.fairysReset += 1;
         FairyManager.FairyManagerSingleton.Instance.fairyScore += 1;
@@ -185,8 +181,6 @@ public partial class fairy_script : Node3D
 
             case State.reset:
                 FairyReady();
-                break;
-            case State.spawn:
                 break;
         }
 
